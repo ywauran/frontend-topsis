@@ -7,7 +7,11 @@ import AlternativePage from "./Pages/AlternativePage";
 import CriteriaPage from "./Pages/CriteriaPage";
 import CriterionWeightPage from "./Pages/CriterionWeightPage";
 import AlternativeValuePage from "./Pages/AlternativeValuePage";
-
+import Header from "./components/Header";
+import AddCriteriaPage from "./Pages/AddCriteriaPage";
+import EditCriteriaPage from "./Pages/EditCriteriaPage";
+import AddAlternativePage from "./Pages/AddAlternativePage";
+import EditAlternativePage from "./Pages/EditAlternativePage";
 const Home = () => {
   const menus = [
     { name: "Dashboard", link: "/", icon: MdOutlineDashboard },
@@ -28,8 +32,9 @@ const Home = () => {
   return (
     <section className="flex gap-6">
       <div
-        className={`bg-[#0e0e0e] min-h-screen "w-36"
-        duration-500 text-gray-100 px-4`}
+        className={`bg-[#0e0e0e] min-h-screen ${
+          open ? "w-72" : "w-16"
+        } duration-500 text-gray-100 px-4`}
       >
         <div className="py-3 flex justify-end">
           <HiMenuAlt3
@@ -49,9 +54,19 @@ const Home = () => {
             >
               <div>{React.createElement(menu?.icon, { size: "20" })}</div>
               <h2
+                style={{
+                  transitionDelay: `${i + 3}00ms`,
+                }}
+                className={`whitespace-pre duration-500 ${
+                  !open && "opacity-0 translate-x-28 overflow-hidden"
+                }`}
+              >
+                {menu?.name}
+              </h2>
+              <h2
                 className={`${
                   open && "hidden"
-                } absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
+                } absolute z-50 left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
               >
                 {menu?.name}
               </h2>
@@ -59,14 +74,24 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="m-3 text-xl text-gray-900 font-semibold">
-        <Routes>
-          <Route path="/" element={<DashboardPage />} />
-          <Route path="/criteria" element={<CriteriaPage />} />
-          <Route path="/criterion-weight" element={<CriterionWeightPage />} />
-          <Route path="/alternative" element={<AlternativePage />} />
-          <Route path="/alternative-value" element={<AlternativeValuePage />} />
-        </Routes>
+      <div className="w-full text-xl text-gray-900 font-semibold">
+        <Header />
+        <div className="m-4">
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/criteria" element={<CriteriaPage />} />
+            <Route path="/criterion-weight" element={<CriterionWeightPage />} />
+            <Route path="/alternative" element={<AlternativePage />} />
+            <Route
+              path="/alternative-value"
+              element={<AlternativeValuePage />}
+            />
+            <Route path="/add-criteria" element={<AddCriteriaPage />} />
+            <Route path="/edit-criteria" element={<EditCriteriaPage />} />
+            <Route path="/add-alternative" element={<AddAlternativePage />} />
+            <Route path="/edit-alternative" element={<EditAlternativePage />} />
+          </Routes>
+        </div>
       </div>
     </section>
   );
