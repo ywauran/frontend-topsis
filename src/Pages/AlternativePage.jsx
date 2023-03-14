@@ -1,7 +1,12 @@
 import React from "react";
+import TableAlternative from "../components/TableAlternative";
 
 const AlternativePage = () => {
-  return <div>AlternativePage</div>;
+  return (
+    <div>
+      <TableAlternative />
+    </div>
+  );
 };
 
 export default AlternativePage;

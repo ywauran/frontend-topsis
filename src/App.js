@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, Routes, Route } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
-import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineDashboard, MdToc } from "react-icons/md";
 import DashboardPage from "./Pages/DashboardPage";
 import AlternativePage from "./Pages/AlternativePage";
 import CriteriaPage from "./Pages/CriteriaPage";
@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <section className="flex gap-6">
       <div
-        className={`bg-[#0e0e0e] min-h-screen "w-16"
+        className={`bg-[#0e0e0e] min-h-screen "w-36"
         duration-500 text-gray-100 px-4`}
       >
         <div className="py-3 flex justify-end">
