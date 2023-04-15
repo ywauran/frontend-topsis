@@ -4,11 +4,11 @@ import { app } from "../config";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 const db = getDatabase(app);
-const TableAlternative = () => {
+const TableCriteriaUser = () => {
   const [data, setData] = useState([]);
 
   const getData = () => {
-    const dbRef = ref(db, "alternative");
+    const dbRef = ref(db, "criteria");
     onValue(dbRef, (snapshot) => {
       let data = [];
       snapshot.forEach((childSnapshot) => {
@@ -31,12 +31,7 @@ const TableAlternative = () => {
   return (
     <>
       <div>
-        <div className="flex justify-end">
-          <Link to={"../add-alternative"} className="button__third">
-            Tambah Alternatif
-          </Link>
-        </div>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="w-full relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -47,13 +42,10 @@ const TableAlternative = () => {
                   Kode
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Alternatif
+                  Kriteria
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Deskripsi
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Aksi
+                  Bobot (W)
                 </th>
               </tr>
             </thead>
@@ -64,26 +56,9 @@ const TableAlternative = () => {
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 >
                   <td className="px-6 py-4">{number + 1}</td>
-                  <td className="px-6 py-4">A{number + 1}</td>
-                  <td className="px-6 py-4">{item.value.alternative}</td>
-                  <td className="px-6 py-4">{item.value.description}</td>
-                  <td className="px-6 py-4">
-                    <div className="px-6 py-4 text-right flex space-x-4">
-                      <Link
-                        to={`../detail-alternative/${item.key}`}
-                        className="button__primary"
-                      >
-                        Detail
-                      </Link>
-                      <Link
-                        to={`../edit-alternative/${item.key}`}
-                        className="button__secondary"
-                      >
-                        Edit
-                      </Link>
-                      <button className="button__warn">Hapus</button>
-                    </div>
-                  </td>
+                  <td className="px-6 py-4">C{number + 1}</td>
+                  <td className="px-6 py-4">{item.value.criteria}</td>
+                  <td className="px-6 py-4">{item.value.weight}</td>
                 </tr>
               ))}
             </tbody>
@@ -94,4 +69,4 @@ const TableAlternative = () => {
   );
 };
 
-export default TableAlternative;
+export default TableCriteriaUser;
