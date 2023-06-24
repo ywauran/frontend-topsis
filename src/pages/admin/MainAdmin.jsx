@@ -4,18 +4,14 @@ import Header from "../../components/Header";
 import AddCriteriaPage from "./criteria/AddCriteriaPage";
 import DataCriteriaPage from "./criteria/DataCriteria";
 import EditCriteriaPage from "./criteria/EditCriteriaPage";
-import DetailCriteriaPage from "./criteria/DetailCriteriaPage";
 import AddAlternativePage from "./alternative/AddAlternativePage";
 import DataAlternativePage from "./alternative/DataAlternative";
 import EditAlternativePage from "./alternative/EditAlternative";
-import DetailAlternativePage from "./alternative/DetailAlternativePage";
 import { MdOutlineDashboard, MdDescription } from "react-icons/md";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { FiFolder } from "react-icons/fi";
-import DetailSubcriteriaPage from "./subcriteria/DetailSubcriteriaPage";
-import AddSubcriteriaPage from "./subcriteria/AddSubcriteriaPage";
-import DataSubcriteriaPage from "./subcriteria/DataSubcriteriaPage";
-import EditSubcriteriaPage from "./subcriteria/EditSubcriteriaPage";
+import AddWeightCriteriaPage from "./weight-criteria/AddWeightCriteriaPage";
+import WeightCriteriaPage from "./weight-criteria/WeightCriteriaPage";
 
 const MainAdmin = () => {
   const [open, setOpen] = useState(true);
@@ -28,23 +24,26 @@ const MainAdmin = () => {
       isAdmin: true,
     },
     {
-      name: "Data Kriteria",
+      name: "Kriteria",
       link: "/pages/data-criteria",
       icon: MdDescription,
     },
     {
-      name: "Data Subkriteria",
-      link: "/pages/data-subcriteria",
+      name: "Bobot Kriteria",
+      link: "/pages/weight-criteria",
       icon: MdDescription,
     },
     {
-      name: "Data Alternatif",
+      name: "Alternatif",
       link: "/pages/data-alternative",
       icon: FiFolder,
     },
   ];
   const [openModalLogout, setOpenModalLogout] = useState(false);
-  const Logout = () => {};
+  const Logout = () => {
+    sessionStorage.removeItem("Auth Token");
+    navigate("/login");
+  };
   useEffect(() => {
     let authToken = sessionStorage.getItem("Auth Token");
 
@@ -60,7 +59,7 @@ const MainAdmin = () => {
             open ? "w-72" : "w-16"
           } duration-500 text-gray-100 px-4`}
         >
-          <div className="py-3 flex justify-end">
+          <div className="flex justify-end py-3">
             <HiMenuAlt3
               size={26}
               className="cursor-pointer"
@@ -68,7 +67,7 @@ const MainAdmin = () => {
             />
           </div>
           <div className="flex flex-col justify-between h-[90%]">
-            <div className="mt-4 flex flex-col gap-4 relative">
+            <div className="relative flex flex-col gap-4 mt-4">
               {menus?.map((menu, i) => (
                 <Link
                   to={menu?.link}
@@ -106,38 +105,18 @@ const MainAdmin = () => {
             </button>
           </div>
         </div>
-        <div className="w-full overflow-x-hidden  text-gray-900 font-semibold">
+        <div className="w-full overflow-x-hidden font-semibold text-gray-900">
           <div>
             <Header />
           </div>
           <div className="p-5">
             <Routes>
               {/* Criteria */}
-              <Route path="/detail-criteria" element={<DetailCriteriaPage />} />
               <Route path="/add-criteria" element={<AddCriteriaPage />} />
               <Route path="/data-criteria" element={<DataCriteriaPage />} />
               <Route path="/edit-criteria/:id" element={<EditCriteriaPage />} />
 
-              {/* Subcriteria */}
-              <Route
-                path="/detail-subcriteria/:id"
-                element={<DetailSubcriteriaPage />}
-              />
-              <Route path="/add-subcriteria" element={<AddSubcriteriaPage />} />
-              <Route
-                path="/data-subcriteria"
-                element={<DataSubcriteriaPage />}
-              />
-              <Route
-                path="/edit-subcriteria/:id"
-                element={<EditSubcriteriaPage />}
-              />
-
               {/* Alternative */}
-              <Route
-                path="/detail-alternative/:id"
-                element={<DetailAlternativePage />}
-              />
               <Route path="/add-alternative" element={<AddAlternativePage />} />
               <Route
                 path="/data-alternative"
@@ -147,6 +126,13 @@ const MainAdmin = () => {
                 path="/edit-alternative/:id"
                 element={<EditAlternativePage />}
               />
+
+              {/* Bobot Criteria */}
+              <Route
+                path="/add-weight-criteria"
+                element={<AddWeightCriteriaPage />}
+              />
+              <Route path="/weight-criteria" element={<WeightCriteriaPage />} />
             </Routes>
           </div>
         </div>
@@ -160,16 +146,16 @@ const MainAdmin = () => {
             openModalLogout ? "block" : "hidden"
           } w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full`}
         >
-          <div className="flex justify-center items-center relative w-full h-max">
+          <div className="relative flex items-center justify-center w-full h-max">
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
               <div className="flex items-start justify-center p-4 border-b rounded-t">
-                <h3 className="text-xl text-center font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-xl font-semibold text-center text-gray-900 dark:text-white">
                   Keluar
                 </h3>
               </div>
 
               <div className="p-6 space-y-6">
-                <p className="text-base text-center leading-relaxed text-gray-500 dark:text-gray-400">
+                <p className="text-base leading-relaxed text-center text-gray-500 dark:text-gray-400">
                   Anda yakin ingin keluar ?
                 </p>
               </div>
@@ -178,7 +164,7 @@ const MainAdmin = () => {
                 <button
                   data-modal-hide="defaultModal"
                   type="button"
-                  className="button__primary w-24"
+                  className="w-24 button__primary"
                   onClick={() => Logout()}
                 >
                   Ya
@@ -187,7 +173,7 @@ const MainAdmin = () => {
                   data-modal-hide="defaultModal"
                   type="button"
                   onClick={() => setOpenModalLogout(false)}
-                  className="button__warn w-24"
+                  className="w-24 button__warn"
                 >
                   Tidak
                 </button>

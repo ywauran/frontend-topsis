@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { uid } from "uid";
 import { app } from "../../../config";
+import { useNavigate } from "react-router-dom";
 import { set, ref, getDatabase } from "firebase/database";
 
 const db = getDatabase(app);
 const AddAlternativePage = () => {
   const [alternative, setAlternative] = useState("");
   const [description, setDescription] = useState("");
+  let navigate = useNavigate();
   const addAlternative = (e) => {
     e.preventDefault();
     const uuid = uid();
@@ -15,11 +17,12 @@ const AddAlternativePage = () => {
       description,
       uuid,
     });
+    navigate("/pages/data-alternative");
   };
   return (
     <>
       <form onSubmit={addAlternative}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div>
             <label htmlFor="" className="label__input">
               Alternatif
@@ -43,7 +46,7 @@ const AddAlternativePage = () => {
             />
           </div>
         </div>
-        <button type="submit" className="button__primary mt-6 w-full">
+        <button type="submit" className="w-full mt-6 button__primary">
           Submit
         </button>
       </form>
