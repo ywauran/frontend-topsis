@@ -1,57 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const FormWeight = () => {
-  const modelKameraOptions = [
-    { value: "mirrorless", label: "Mirrorless", rating: 1 },
-    { value: "pocket", label: "Pocket", rating: 2 },
-    { value: "dslr", label: "DSLR", rating: 3 },
-  ];
+  const [name, setName] = useState("Harke");
+  const [cameraModel, setCameraModel] = useState(1);
+  const [cameraPrice, setCameraPrice] = useState(1);
+  const [photoResolution, setPhotoResolution] = useState(1);
+  const [videoResolution, setVideoResolution] = useState(1);
+  const [batteryPower, setBatteryPower] = useState(1);
 
-  const hargaKameraOptions = [
-    { value: "1-5", label: "Rp. 1 juta – Rp. 5 juta", rating: 1 },
-    { value: "5-10", label: "Rp. > 5 juta – Rp. 10 juta", rating: 2 },
-    { value: "10-15", label: "Rp. > 10 juta – Rp. 15 juta", rating: 3 },
-    { value: "15-20", label: "Rp. > 15 juta – Rp. 20 juta", rating: 4 },
-    { value: "20-25", label: "Rp. > 20 juta – Rp. 25 juta >", rating: 5 },
-  ];
-
-  const resolusiFotoOptions = [
-    { value: "10-15", label: "10 MP – 15 MP", rating: 1 },
-    { value: "15-20", label: "> 15 MP – 20 MP", rating: 2 },
-    { value: "20-25", label: "> 20 MP – 25 MP", rating: 3 },
-    { value: "25-30", label: "> 25 MP – 30 MP", rating: 4 },
-    { value: "30", label: "> 30 MP", rating: 5 },
-  ];
-
-  const resolusiVideoOptions = [
-    { value: "640", label: "Video (640 x 480)", rating: 1 },
-    { value: "1280", label: "Video HD (1280 x 720)", rating: 2 },
-    { value: "1920", label: "Full HD (1920 x 1080)", rating: 3 },
-    { value: "3840", label: "Ultra HD (3840 x 2160)", rating: 4 },
-    { value: "4096", label: "4K (4096 x 2160)", rating: 5 },
-  ];
-
-  const dayaBateraiOptions = [
-    { value: "100-500", label: "100 mAH – 500 mAH", rating: 1 },
-    { value: "500-1000", label: "> 500 mAH – 1000 mAH", rating: 2 },
-    { value: "1000-1500", label: "> 1000 mAH – 1500 mAH", rating: 3 },
-    { value: "1500-2000", label: "> 1500 mAH – 2000 mAH", rating: 4 },
-    { value: "2000-2500", label: "> 2000 mAH – 2500 mAH", rating: 5 },
-  ];
-
-  const hello = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hello world");
+    console.log("Model Kamera:", cameraModel);
+    console.log("Harga Kamera:", cameraPrice);
+    console.log("Resolusi Foto:", photoResolution);
+    console.log("Resolusi Video:", videoResolution);
+    console.log("Kapasitas Baterai:", batteryPower);
   };
+
+  const modelOptions = [
+    { value: "1", label: "Mirrorless" },
+    { value: "2", label: "Pocket" },
+    { value: "3", label: "DSLR" },
+  ];
+
+  const priceOptions = [
+    { value: "1", label: "Rp. 1 juta – Rp. 5 juta" },
+    { value: "2", label: "Rp. > 5 juta – Rp. 10 juta" },
+    { value: "3", label: "Rp. > 10 juta – Rp. 15 juta" },
+    { value: "4", label: "Rp. > 15 juta – Rp. 20 juta" },
+    { value: "5", label: "Rp. > 20 juta – Rp. 25 juta >" },
+  ];
+
+  const photoResolutionOptions = [
+    { value: "1", label: "10 MP – 15 MP" },
+    { value: "2", label: "> 15 MP – 20 MP" },
+    { value: "3", label: "> 20 MP – 25 MP" },
+    { value: "4", label: "> 25 MP – 30 MP" },
+    { value: "5", label: "> 30 MP" },
+  ];
+
+  const videoResolutionOptions = [
+    { value: "1", label: "Video (640 x 480)" },
+    { value: "2", label: "Video HD (1280 x 720)" },
+    { value: "3", label: "Full HD (1920 x 1080)" },
+    { value: "4", label: "Ultra HD (3840 x 2160)" },
+    { value: "5", label: "4K (4096 x 2160)" },
+  ];
+
+  const batteryPowerOptions = [
+    { value: "1", label: "100 mAH – 500 mAH" },
+    { value: "2", label: "> 500 mAH – 1000 mAH" },
+    { value: "3", label: "> 1000 mAH – 1500 mAH" },
+    { value: "4", label: "> 1500 mAH – 2000 mAH" },
+    { value: "5", label: "> 2000 mAH – 2500 mAH" },
+  ];
 
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="shadow w-[300px] md:w-[500px] p-8">
-        <form onSubmit={hello} className="flex flex-col space-y-4">
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+          <div>
+            <label className="label__input">Nama</label>
+            <input
+              type="text"
+              className="input"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
           <div>
             <label className="label__input">Model Kamera</label>
-            <select name="modelKamera" className="input">
-              {modelKameraOptions.map((option) => (
+            <select
+              name="cameraModel"
+              className="input"
+              value={cameraModel}
+              onChange={(e) => setCameraModel(e.target.value)}
+            >
+              {modelOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
@@ -60,8 +85,13 @@ const FormWeight = () => {
           </div>
           <div>
             <label className="label__input">Harga Kamera</label>
-            <select name="hargaKamera" className="input">
-              {hargaKameraOptions.map((option) => (
+            <select
+              name="cameraPrice"
+              className="input"
+              value={cameraPrice}
+              onChange={(e) => setCameraPrice(e.target.value)}
+            >
+              {priceOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
@@ -69,9 +99,14 @@ const FormWeight = () => {
             </select>
           </div>
           <div>
-            <label className="label__input">Resolusi Foto Kamera (Pixel)</label>
-            <select name="resolusiFoto" className="input">
-              {resolusiFotoOptions.map((option) => (
+            <label className="label__input">Resolusi Foto (Pixel)</label>
+            <select
+              name="photoResolution"
+              className="input"
+              value={photoResolution}
+              onChange={(e) => setPhotoResolution(e.target.value)}
+            >
+              {photoResolutionOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
@@ -79,11 +114,14 @@ const FormWeight = () => {
             </select>
           </div>
           <div>
-            <label className="label__input">
-              Resolusi Video Kamera (Pixel)
-            </label>
-            <select name="resolusiVideo" className="input">
-              {resolusiVideoOptions.map((option) => (
+            <label className="label__input">Resolusi Video (Pixel)</label>
+            <select
+              name="videoResolution"
+              className="input"
+              value={videoResolution}
+              onChange={(e) => setVideoResolution(e.target.value)}
+            >
+              {videoResolutionOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
@@ -91,18 +129,27 @@ const FormWeight = () => {
             </select>
           </div>
           <div>
-            <label className="label__input">Daya Baterai Kamera</label>
-            <select name="dayaBaterai" className="input">
-              {dayaBateraiOptions.map((option) => (
+            <label className="label__input">Kapasitas Baterai</label>
+            <select
+              name="batteryPower"
+              className="input"
+              value={batteryPower}
+              onChange={(e) => setBatteryPower(e.target.value)}
+            >
+              {batteryPowerOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
             </select>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <Link
+            to={`/rank/${name}/${cameraModel}/${cameraPrice}/${photoResolution}/${videoResolution}/${batteryPower}`}
+            type="submit"
+            className="btn btn-primary"
+          >
             Submit
-          </button>
+          </Link>
         </form>
       </div>
     </div>

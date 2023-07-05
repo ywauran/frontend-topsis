@@ -69,9 +69,6 @@ const TableCriteria = () => {
                     Kriteria
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Bobot (W)
-                  </th>
-                  <th scope="col" className="px-6 py-3">
                     Aksi
                   </th>
                 </tr>
@@ -85,7 +82,6 @@ const TableCriteria = () => {
                     <td className="px-6 py-4">{number + 1}</td>
                     <td className="px-6 py-4">C{number + 1}</td>
                     <td className="px-6 py-4">{item.value.criteria}</td>
-                    <td className="px-6 py-4">{item.value.weight}</td>
                     <td className="flex px-6 py-4 space-x-4 text-right">
                       <Link
                         to={`../edit-criteria/${item.key}`}

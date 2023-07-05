@@ -59,7 +59,7 @@ const TableAlternative = () => {
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   No
@@ -68,10 +68,22 @@ const TableAlternative = () => {
                   Kode
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Alternatif
+                  Nama Kamera
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Deskripsi
+                  Model Kamera
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Harga Kamera
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Resolusi Foto Kamera (Pixel)
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Resolusi Video Kamera (Pixel)
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Daya Baterai Kamera
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Aksi
@@ -86,6 +98,10 @@ const TableAlternative = () => {
                 >
                   <td className="px-6 py-4">{index + 1}</td>
                   <td className="px-6 py-4">A{index + 1}</td>
+                  <td className="px-6 py-4">{item.value.alternative}</td>
+                  <td className="px-6 py-4">{item.value.alternative}</td>
+                  <td className="px-6 py-4">{item.value.alternative}</td>
+                  <td className="px-6 py-4">{item.value.alternative}</td>
                   <td className="px-6 py-4">{item.value.alternative}</td>
                   <td className="px-6 py-4">{item.value.description}</td>
                   <td className="px-6 py-4">

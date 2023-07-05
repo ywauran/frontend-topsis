@@ -107,6 +107,7 @@ const WeightCriteriaPage = () => {
                   (subcriteria) =>
                     subcriteria.selectedCriteria === item.value.criteria
                 )
+                .sort((next, prev) => next.weight - prev.weight)
                 .map((subcriteria) => (
                   <tr
                     key={subcriteria.key}

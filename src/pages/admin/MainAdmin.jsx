@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Route, Routes, Link } from "react-router-dom";
+import { useNavigate, Route, Routes, NavLink } from "react-router-dom"; // Change `Link` to `NavLink`
 import Header from "../../components/Header";
 import AddCriteriaPage from "./criteria/AddCriteriaPage";
 import DataCriteriaPage from "./criteria/DataCriteria";
@@ -9,7 +9,7 @@ import DataAlternativePage from "./alternative/DataAlternative";
 import EditAlternativePage from "./alternative/EditAlternative";
 import { MdOutlineDashboard, MdDescription } from "react-icons/md";
 import { HiMenuAlt3 } from "react-icons/hi";
-import { FiFolder } from "react-icons/fi";
+import { FiFolder, FiLogOut } from "react-icons/fi";
 import AddWeightCriteriaPage from "./weight-criteria/AddWeightCriteriaPage";
 import WeightCriteriaPage from "./weight-criteria/WeightCriteriaPage";
 
@@ -69,12 +69,13 @@ const MainAdmin = () => {
           <div className="flex flex-col justify-between h-[90%]">
             <div className="relative flex flex-col gap-4 mt-4">
               {menus?.map((menu, i) => (
-                <Link
+                <NavLink
                   to={menu?.link}
                   key={i}
                   className={` ${
                     menu?.margin && "mt-5"
                   } group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}
+                  activeClassName="text-[#FF0000]"
                 >
                   <div>{React.createElement(menu?.icon, { size: "20" })}</div>
                   <h2
@@ -94,15 +95,31 @@ const MainAdmin = () => {
                   >
                     {menu?.name}
                   </h2>
-                </Link>
+                </NavLink>
               ))}
+              <button
+                onClick={() => setOpenModalLogout(true)}
+                className="group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md"
+              >
+                <div>
+                  <FiLogOut size="20" />
+                </div>
+                <h2
+                  className={`whitespace-pre duration-300 ${
+                    !open && "opacity-0 translate-x-28 overflow-hidden"
+                  }`}
+                >
+                  Logout
+                </h2>
+                <h2
+                  className={`${
+                    open && "hidden"
+                  } absolute z-50 left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
+                >
+                  Logout
+                </h2>
+              </button>
             </div>
-            <button
-              onClick={() => setOpenModalLogout(true)}
-              className="text-sm  gap-3.5 font-medium p-2 bg-gray-800 rounded-md"
-            >
-              Keluar
-            </button>
           </div>
         </div>
         <div className="w-full overflow-x-hidden font-semibold text-gray-900">

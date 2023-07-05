@@ -42,7 +42,22 @@ const TableAlternativeUser = () => {
                   Kode
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Alternatif
+                  Nama Kamera
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Model Kamera
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Harga Kamera
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Resolusi Foto Kamera (Pixel)
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Resolusi Video Kamera (Pixel)
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Daya Baterai Kamera
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Deskripsi

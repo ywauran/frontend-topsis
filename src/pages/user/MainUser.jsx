@@ -9,7 +9,7 @@ import FormWeight from "../../components/FormWeight";
 const MainUser = () => {
   return (
     <>
-      <div className="btm-nav">
+      <div className="z-50 box__shadow btm-nav">
         <NavLink end to="/" activeClassName="active">
           <MdHome />
         </NavLink>
@@ -21,11 +21,17 @@ const MainUser = () => {
         </NavLink>
       </div>
 
-      <Routes>
-        <Route path="/" element={<ListCameraPage />} />
-        <Route path="/calculate" element={<FormWeight />} />
-        <Route path="/information" element={<AboutApplication />} />
-      </Routes>
+      <div className="pb-36">
+        <Routes>
+          <Route path="/" element={<ListCameraPage />} />
+          <Route path="/calculate" element={<FormWeight />} />
+          <Route path="/information" element={<AboutApplication />} />
+          <Route
+            path="/rank/:name/:model/:price/:photo/:video/:battery"
+            element={<RankingPage />}
+          />
+        </Routes>
+      </div>
     </>
   );
 };
