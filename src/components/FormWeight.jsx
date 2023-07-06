@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const FormWeight = () => {
-  const [name, setName] = useState("Harke");
+  const [name, setName] = useState("");
   const [cameraModel, setCameraModel] = useState(1);
   const [cameraPrice, setCameraPrice] = useState(1);
   const [photoResolution, setPhotoResolution] = useState(1);
