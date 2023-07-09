@@ -68,23 +68,12 @@ const TableAlternative = () => {
                   Kode
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Gambar Kamera
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Nama Kamera
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Model Kamera
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Harga Kamera
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Resolusi Foto Kamera (Pixel)
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Resolusi Video Kamera (Pixel)
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Daya Baterai Kamera
-                </th>
+
                 <th scope="col" className="px-6 py-3">
                   Aksi
                 </th>
@@ -94,18 +83,20 @@ const TableAlternative = () => {
               {data.map((item, index) => (
                 <tr
                   key={index + 1}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 >
                   <td className="px-6 py-4">{index + 1}</td>
                   <td className="px-6 py-4">A{index + 1}</td>
+                  <td className="px-6 py-4 ">
+                    <img
+                      src={item.value.imageUrl}
+                      alt=""
+                      className="w-12 h-12 mx-auto"
+                    />
+                  </td>
                   <td className="px-6 py-4">{item.value.alternative}</td>
-                  <td className="px-6 py-4">{item.value.alternative}</td>
-                  <td className="px-6 py-4">{item.value.alternative}</td>
-                  <td className="px-6 py-4">{item.value.alternative}</td>
-                  <td className="px-6 py-4">{item.value.alternative}</td>
-                  <td className="px-6 py-4">{item.value.description}</td>
                   <td className="px-6 py-4">
-                    <div className="flex px-6 py-4 space-x-4 text-right">
+                    <div className="flex justify-center px-6 py-4 space-x-4 text-right">
                       <Link
                         to={`../edit-alternative/${item.key}`}
                         className="button__secondary"
