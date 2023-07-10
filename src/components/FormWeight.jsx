@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ToastError from "./ToastError";
 
 const FormWeight = () => {
   const [name, setName] = useState("");
@@ -8,9 +9,21 @@ const FormWeight = () => {
   const [photoResolution, setPhotoResolution] = useState(1);
   const [videoResolution, setVideoResolution] = useState(1);
   const [batteryPower, setBatteryPower] = useState(1);
+  let navigate = useNavigate();
+  const [toast, setToast] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (name.trim() === "") {
+      setToast(true);
+      setTimeout(() => {
+        setToast(false);
+      }, 2000);
+      return;
+    }
+    navigate(
+      `/rank/${name}/${cameraModel}/${cameraPrice}/${photoResolution}/${videoResolution}/${batteryPower}`
+    );
     console.log("Model Kamera:", cameraModel);
     console.log("Harga Kamera:", cameraPrice);
     console.log("Resolusi Foto:", photoResolution);
@@ -57,102 +70,101 @@ const FormWeight = () => {
   ];
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="shadow w-[300px] md:w-[500px] p-8">
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-          <div>
-            <label className="label__input">Nama</label>
-            <input
-              type="text"
-              className="input"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label className="label__input">Model Kamera</label>
-            <select
-              name="cameraModel"
-              className="input"
-              value={cameraModel}
-              onChange={(e) => setCameraModel(e.target.value)}
-            >
-              {modelOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="label__input">Harga Kamera</label>
-            <select
-              name="cameraPrice"
-              className="input"
-              value={cameraPrice}
-              onChange={(e) => setCameraPrice(e.target.value)}
-            >
-              {priceOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="label__input">Resolusi Foto (Pixel)</label>
-            <select
-              name="photoResolution"
-              className="input"
-              value={photoResolution}
-              onChange={(e) => setPhotoResolution(e.target.value)}
-            >
-              {photoResolutionOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="label__input">Resolusi Video (Pixel)</label>
-            <select
-              name="videoResolution"
-              className="input"
-              value={videoResolution}
-              onChange={(e) => setVideoResolution(e.target.value)}
-            >
-              {videoResolutionOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="label__input">Kapasitas Baterai</label>
-            <select
-              name="batteryPower"
-              className="input"
-              value={batteryPower}
-              onChange={(e) => setBatteryPower(e.target.value)}
-            >
-              {batteryPowerOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <Link
-            to={`/rank/${name}/${cameraModel}/${cameraPrice}/${photoResolution}/${videoResolution}/${batteryPower}`}
-            type="submit"
-            className="btn btn-primary"
-          >
-            Submit
-          </Link>
-        </form>
+    <>
+      {toast && <ToastError />}
+      <div className="flex items-center justify-center h-screen">
+        <div className="shadow w-[300px] md:w-[500px] p-8">
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+            <div>
+              <label className="label__input">Nama</label>
+              <input
+                type="text"
+                className="input"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="label__input">Model Kamera</label>
+              <select
+                name="cameraModel"
+                className="input"
+                value={cameraModel}
+                onChange={(e) => setCameraModel(e.target.value)}
+              >
+                {modelOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="label__input">Harga Kamera</label>
+              <select
+                name="cameraPrice"
+                className="input"
+                value={cameraPrice}
+                onChange={(e) => setCameraPrice(e.target.value)}
+              >
+                {priceOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="label__input">Resolusi Foto (Pixel)</label>
+              <select
+                name="photoResolution"
+                className="input"
+                value={photoResolution}
+                onChange={(e) => setPhotoResolution(e.target.value)}
+              >
+                {photoResolutionOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="label__input">Resolusi Video (Pixel)</label>
+              <select
+                name="videoResolution"
+                className="input"
+                value={videoResolution}
+                onChange={(e) => setVideoResolution(e.target.value)}
+              >
+                {videoResolutionOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="label__input">Kapasitas Baterai</label>
+              <select
+                name="batteryPower"
+                className="input"
+                value={batteryPower}
+                onChange={(e) => setBatteryPower(e.target.value)}
+              >
+                {batteryPowerOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

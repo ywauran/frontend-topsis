@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   normalizeMatrix,
   calculateWeightedMatrix,
@@ -7,9 +7,13 @@ import {
   calculateCloseness,
   rankAlternatives,
 } from "../../utils/algorithm";
+import { app } from "../../config/index";
+import { getDatabase, ref, onValue } from "firebase/database";
 import { useParams } from "react-router-dom";
 
+const db = getDatabase(app);
 const RankingPage = () => {
+  const [data, setData] = useState([]);
   const { name, model, price, photo, video, battery } = useParams();
   const [matrix, setMatrix] = useState([
     [4, 7, 6, 8, 3],
@@ -25,43 +29,10 @@ const RankingPage = () => {
   const [distances, setDistances] = useState([]);
   const [closeness, setCloseness] = useState([]);
   const [rankedAlternatives, setRankedAlternatives] = useState([]);
-
-  const handleMatrixChange = (e, row, col) => {
-    let value = Number(e.target.value);
-
-    if (value > 5) {
-      value = 5;
-    } else if (value < 0) {
-      value = 0;
-    }
-
-    const updatedMatrix = [...matrix];
-    updatedMatrix[row][col] = value;
-    setMatrix(updatedMatrix);
-  };
-
-  const handleWeightsChange = (e, index) => {
-    let value = Number(e.target.value);
-
-    if (value < 1) {
-      value = 1;
-    } else if (value > 5) {
-      value = 5;
-    }
-
-    const updatedWeights = [...weights];
-    updatedWeights[index] = value;
-    setWeights(updatedWeights);
-  };
-
-  const handleMaximizeChange = (e, index) => {
-    const updatedMaximize = [...isMaximize];
-    updatedMaximize[index] = e.target.checked;
-    setIsMaximize(updatedMaximize);
-  };
+  const [cameraAttributes, setCameraAttributes] = useState([]);
 
   const handleCalculate = () => {
-    const normalized = normalizeMatrix(matrix);
+    const normalized = normalizeMatrix(cameraAttributes);
     const weighted = calculateWeightedMatrix(normalized, weights);
     const ideal = calculateIdealSolutions(weighted, isMaximize);
     const dist = calculateDistances(weighted, ideal);
@@ -75,6 +46,34 @@ const RankingPage = () => {
     setCloseness(close);
     setRankedAlternatives(ranked);
   };
+
+  const getData = () => {
+    const dbRef = ref(db, "alternative");
+    onValue(dbRef, (snapshot) => {
+      let data = [];
+      let cameraAttributes = [];
+      snapshot.forEach((childSnapshot) => {
+        let key = childSnapshot.key;
+        let value = childSnapshot.val();
+        data.push({
+          key: key,
+          value: value,
+        });
+
+        cameraAttributes.push({
+          camera: value.alternative,
+          cameraAttributes: value.cameraAttributes,
+        });
+      });
+      setData(data);
+      setCameraAttributes(cameraAttributes);
+      console.log(cameraAttributes);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className="p-8 shadow-md">
@@ -92,14 +91,20 @@ const RankingPage = () => {
             </tr>
           </thead>
           <tbody>
-            {matrix.map((row, rowIndex) => (
+            {cameraAttributes.map((row, rowIndex) => (
               <tr key={rowIndex}>
-                <td className="text-center">Alternatif {rowIndex + 1}</td>
-                {row.map((value, colIndex) => (
-                  <td key={colIndex} className="text-center">
-                    {value}
-                  </td>
-                ))}
+                <td className="text-center">{row.camera}</td>
+                <td className="text-center">{row.cameraAttributes.model}</td>
+                <td className="text-center">{row.cameraAttributes.price}</td>
+                <td className="text-center">
+                  {row.cameraAttributes.photoResolution}
+                </td>
+                <td className="text-center">
+                  {row.cameraAttributes.videoResolution}
+                </td>
+                <td className="text-center">
+                  {row.cameraAttributes.batteryPower}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -148,7 +153,7 @@ const RankingPage = () => {
               <tbody className="text-center">
                 {normalizedMatrix.map((row, rowIndex) => (
                   <tr key={rowIndex}>
-                    <td>Alternatif {rowIndex + 1}</td>
+                    <td>{cameraAttributes[rowIndex].camera}</td>
                     {row.map((value, colIndex) => (
                       <td key={colIndex}>{value.toFixed(2)}</td>
                     ))}
@@ -175,7 +180,7 @@ const RankingPage = () => {
               <tbody>
                 {weightedMatrix.map((row, rowIndex) => (
                   <tr key={rowIndex}>
-                    <td>Alternatif {rowIndex + 1}</td>
+                    <td>{cameraAttributes[rowIndex].camera}</td>
                     {row.map((value, colIndex) => (
                       <td key={colIndex}>{value.toFixed(2)}</td>
                     ))}
@@ -321,7 +326,7 @@ const RankingPage = () => {
                 {rankedAlternatives.map((alternative, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>Alternatif {alternative + 1}</td>
+                    <td>{cameraAttributes[alternative].camera}</td>
                   </tr>
                 ))}
               </tbody>

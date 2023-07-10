@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ImagePlaceholder from "../../assets/images.png";
 import Header from "../../components/Header";
+import { app } from "../../config";
+import { getDatabase, ref, onValue, remove } from "firebase/database";
 
+const db = getDatabase(app);
 const ListCameraPage = () => {
-  const data = [1, 3, 4, 5, 6, 6, 6, 6];
+  const [data, setData] = useState([]);
+  const getData = () => {
+    const dbRef = ref(db, "alternative");
+    onValue(dbRef, (snapshot) => {
+      let data = [];
+      snapshot.forEach((childSnapshot) => {
+        let key = childSnapshot.key;
+        let value = childSnapshot.val();
+
+        data.push({
+          key: key,
+          value: value,
+        });
+      });
+      console.log(data);
+      setData(data);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <>
       <Header />
@@ -12,14 +36,13 @@ const ListCameraPage = () => {
           <div className="shadow-xl card lg:card-side bg-base-100">
             <div className="">
               <img
-                src={ImagePlaceholder}
+                src={item.value.imageUrl}
                 alt="Album"
-                className="w-full h-full rounded-tr-xl"
+                className="w-36 h-36 rounded-tr-xl"
               />
             </div>
             <div className="card-body">
-              <h2 className="card-title">New album is released!</h2>
-              <p>Click the button to listen on Spotiwhy app.</p>
+              <h2 className="card-title">{item.value.alternative}</h2>
               <div className="justify-end card-actions">
                 <button className="btn btn-primary">Detail</button>
               </div>
