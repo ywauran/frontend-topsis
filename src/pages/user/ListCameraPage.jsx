@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import ImagePlaceholder from "../../assets/images.png";
 import Header from "../../components/Header";
 import { app } from "../../config";
-import { getDatabase, ref, onValue, remove } from "firebase/database";
+import { getDatabase, ref, onValue } from "firebase/database";
+import DetailCamera from "./DetailCamera";
 
 const db = getDatabase(app);
 const ListCameraPage = () => {
   const [data, setData] = useState([]);
+  const [selectedCamera, setSelectedCamera] = useState({});
+  const [open, setOpen] = useState(false);
   const getData = () => {
     const dbRef = ref(db, "alternative");
     onValue(dbRef, (snapshot) => {
@@ -25,6 +27,10 @@ const ListCameraPage = () => {
     });
   };
 
+  const handleDetail = (selected) => {
+    setSelectedCamera(selected);
+    setOpen(true);
+  };
   useEffect(() => {
     getData();
   }, []);
@@ -44,12 +50,18 @@ const ListCameraPage = () => {
             <div className="card-body">
               <h2 className="card-title">{item.value.alternative}</h2>
               <div className="justify-end card-actions">
-                <button className="btn btn-primary">Detail</button>
+                <button
+                  onClick={() => handleDetail(item)}
+                  className="btn btn-primary"
+                >
+                  Detail
+                </button>
               </div>
             </div>
           </div>
         ))}
       </div>
+      {open && <DetailCamera setOpen={setOpen} item={selectedCamera} />}
     </>
   );
 };
