@@ -5,7 +5,7 @@ import ToastError from "./ToastError";
 const FormWeight = () => {
   const [name, setName] = useState("");
   const [cameraModel, setCameraModel] = useState(1);
-  const [cameraPrice, setCameraPrice] = useState(1);
+  const [cameraPrice, setCameraPrice] = useState(5);
   const [photoResolution, setPhotoResolution] = useState(1);
   const [videoResolution, setVideoResolution] = useState(1);
   const [batteryPower, setBatteryPower] = useState(1);
@@ -38,11 +38,11 @@ const FormWeight = () => {
   ];
 
   const priceOptions = [
-    { value: "1", label: "Rp. 1 juta – Rp. 5 juta" },
-    { value: "2", label: "Rp. > 5 juta – Rp. 10 juta" },
+    { value: "5", label: "Rp. 1 juta – Rp. 5 juta" },
+    { value: "4", label: "Rp. > 5 juta – Rp. 10 juta" },
     { value: "3", label: "Rp. > 10 juta – Rp. 15 juta" },
-    { value: "4", label: "Rp. > 15 juta – Rp. 20 juta" },
-    { value: "5", label: "Rp. > 20 juta – Rp. 25 juta >" },
+    { value: "2", label: "Rp. > 15 juta – Rp. 20 juta" },
+    { value: "1", label: "Rp. > 20 juta – Rp. 25 juta >" },
   ];
 
   const photoResolutionOptions = [
