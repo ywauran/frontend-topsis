@@ -7,14 +7,14 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDGac-C-PVc4gOsPNH2kKJAke8HukgyRxI",
-  authDomain: "topsis-ec787.firebaseapp.com",
-  databaseURL: "https://topsis-ec787-default-rtdb.firebaseio.com",
-  projectId: "topsis-ec787",
-  storageBucket: "topsis-ec787.appspot.com",
-  messagingSenderId: "497387222611",
-  appId: "1:497387222611:web:0d0fe63c875cc4c4ccb8a6",
-  measurementId: "G-B3C0SPMMX9",
+  apiKey: "AIzaSyAFDB2H2Cv9pj-ihc7YTBDyEDZeMJ7Oygs",
+  authDomain: "capatu-d79d1.firebaseapp.com",
+  databaseURL: "https://capatu-d79d1.firebaseio.com",
+  projectId: "capatu-d79d1",
+  storageBucket: "capatu-d79d1.appspot.com",
+  messagingSenderId: "903209175026",
+  appId: "1:903209175026:web:a9c426e764c6f04c03cd6b",
+  measurementId: "G-K27F1QQLPV",
 };
 
 // Initialize Firebase
