@@ -9,6 +9,7 @@ import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDGac-C-PVc4gOsPNH2kKJAke8HukgyRxI",
   authDomain: "topsis-ec787.firebaseapp.com",
+  databaseURL: "https://topsis-ec787-default-rtdb.firebaseio.com",
   projectId: "topsis-ec787",
   storageBucket: "topsis-ec787.appspot.com",
   messagingSenderId: "497387222611",
