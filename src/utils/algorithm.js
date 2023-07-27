@@ -1,21 +1,31 @@
 export const normalizeMatrix = (data) => {
   const numAlternatives = data.length;
   const numCriteria = Object.keys(data[0].cameraAttributes).length;
+  const sumSquaredAttributes = {};
+
+  for (let i = 0; i < numAlternatives; i++) {
+    for (let j = 0; j < numCriteria; j++) {
+      const attributeName = Object.keys(data[i].cameraAttributes)[j];
+      const attributeValue = data[i].cameraAttributes[attributeName];
+      if (sumSquaredAttributes[attributeName] === undefined) {
+        sumSquaredAttributes[attributeName] = 0;
+      }
+      sumSquaredAttributes[attributeName] += attributeValue * attributeValue;
+    }
+  }
+
   const normalizedMatrix = [];
 
   for (let i = 0; i < numAlternatives; i++) {
-    let sumSquared = 0;
+    const normalizedRow = [];
 
     for (let j = 0; j < numCriteria; j++) {
       const attributeName = Object.keys(data[i].cameraAttributes)[j];
       const attributeValue = data[i].cameraAttributes[attributeName];
-      sumSquared += attributeValue * attributeValue;
+      const sqrtSumSquared = Math.sqrt(sumSquaredAttributes[attributeName]);
+      normalizedRow.push(attributeValue / sqrtSumSquared);
     }
 
-    const sqrtSumSquared = Math.sqrt(sumSquared);
-    const normalizedRow = Object.values(data[i].cameraAttributes).map(
-      (value) => value / sqrtSumSquared
-    );
     normalizedMatrix.push(normalizedRow);
   }
 

@@ -67,7 +67,6 @@ const RankingPage = () => {
       });
       setData(data);
       setCameraAttributes(cameraAttributes);
-      console.log(cameraAttributes);
     });
   };
 
@@ -94,16 +93,16 @@ const RankingPage = () => {
             {cameraAttributes.map((row, rowIndex) => (
               <tr key={rowIndex}>
                 <td className="text-center">{row.camera}</td>
+                <td className="text-center">
+                  {row.cameraAttributes.batteryPower}
+                </td>
                 <td className="text-center">{row.cameraAttributes.model}</td>
-                <td className="text-center">{row.cameraAttributes.price}</td>
                 <td className="text-center">
                   {row.cameraAttributes.photoResolution}
                 </td>
+                <td className="text-center">{row.cameraAttributes.price}</td>
                 <td className="text-center">
                   {row.cameraAttributes.videoResolution}
-                </td>
-                <td className="text-center">
-                  {row.cameraAttributes.batteryPower}
                 </td>
               </tr>
             ))}
