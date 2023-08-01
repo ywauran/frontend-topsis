@@ -67,6 +67,10 @@ export const calculateIdealSolutions = (weightedMatrix, isMaximize) => {
     idealSolutions.push(extremum);
   }
 
+  // Set the second criterion to use the minimum value
+  idealSolutions[1] = Math.min(...idealSolutions);
+
+  console.log(idealSolutions);
   return idealSolutions;
 };
 
