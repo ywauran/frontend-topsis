@@ -22,7 +22,7 @@ const MainUser = () => {
           <Route path="/" element={<ListCameraPage />} />
           <Route path="/calculate" element={<FormWeight />} />
           <Route
-            path="/rank/:name/:model/:price/:photo/:video/:battery"
+            path="/rank/:model/:price/:photo/:video/:battery"
             element={<RankingPage />}
           />
         </Routes>

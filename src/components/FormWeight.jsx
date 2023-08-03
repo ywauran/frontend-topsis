@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import ToastError from "./ToastError";
 
 const FormWeight = () => {
-  const [name, setName] = useState("");
   const [cameraModel, setCameraModel] = useState(1);
   const [cameraPrice, setCameraPrice] = useState(5);
   const [photoResolution, setPhotoResolution] = useState(1);
@@ -14,15 +13,15 @@ const FormWeight = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.trim() === "") {
-      setToast(true);
-      setTimeout(() => {
-        setToast(false);
-      }, 2000);
-      return;
-    }
+    // if (name.trim() === "") {
+    //   setToast(true);
+    //   setTimeout(() => {
+    //     setToast(false);
+    //   }, 2000);
+    //   return;
+    // }
     navigate(
-      `/rank/${name}/${cameraModel}/${cameraPrice}/${photoResolution}/${videoResolution}/${batteryPower}`
+      `/rank/${cameraModel}/${cameraPrice}/${photoResolution}/${videoResolution}/${batteryPower}`
     );
     console.log("Model Kamera:", cameraModel);
     console.log("Harga Kamera:", cameraPrice);
@@ -75,14 +74,14 @@ const FormWeight = () => {
       <div className="flex items-center justify-center h-screen">
         <div className="shadow w-[300px] md:w-[500px] p-8">
           <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-            <div>
+            {/* <div>
               <label className="label__input">Nama</label>
               <input
                 type="text"
                 className="input"
                 onChange={(e) => setName(e.target.value)}
               />
-            </div>
+            </div> */}
             <div>
               <label className="label__input">Model Kamera</label>
               <select

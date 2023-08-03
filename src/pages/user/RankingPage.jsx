@@ -77,39 +77,7 @@ const RankingPage = () => {
   return (
     <div className="p-8 shadow-md">
       <h2 className="my-3 text-xl font-bold text-center">Kalkulator TOPSIS</h2>
-      <div className="p-4 overflow-x-auto shadow">
-        <table className="table">
-          <thead className="text-center text-black">
-            <tr>
-              <th>Alternatif</th>
-              {matrix[0].map((_, col) => (
-                <th key={col} className="text-center">
-                  Kriteria {col + 1}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {cameraAttributes.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                <td className="text-center">{row.camera}</td>
-                <td className="text-center">
-                  {row.cameraAttributes.batteryPower}
-                </td>
-                <td className="text-center">{row.cameraAttributes.model}</td>
-                <td className="text-center">
-                  {row.cameraAttributes.photoResolution}
-                </td>
-                <td className="text-center">{row.cameraAttributes.price}</td>
-                <td className="text-center">
-                  {row.cameraAttributes.videoResolution}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <h3>Bobot</h3>
+      <h3 className="text-left">Bobot</h3>
       <div className="p-4 overflow-x-auto shadow">
         <table className="table">
           <thead className="text-center text-black">
@@ -119,15 +87,65 @@ const RankingPage = () => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {weights.map((weight, index) => (
-              <tr key={index} className="text-center">
-                <td>Kriteria {index + 1}</td>
-                <td>{weight}</td>
-              </tr>
-            ))}
+            <tr className="text-center">
+              <td>Model Kamera</td>
+              <td>{model}</td>
+            </tr>
+            <tr className="text-center">
+              <td>Harga Kamera</td>
+              <td>{price}</td>
+            </tr>
+            <tr className="text-center">
+              <td>Resolusi Foto (Pixel)</td>
+              <td>{photo}</td>
+            </tr>
+            <tr className="text-center">
+              <td>Resolusi Video (Pixel)</td>
+              <td>{video}</td>
+            </tr>
+            <tr className="text-center">
+              <td>Kapasitas Baterai</td>
+              <td>{battery}</td>
+            </tr>
           </tbody>
         </table>
       </div>
+      <div>
+        <h3 className="">Bobot Kriteria</h3>
+        <div className="p-4 overflow-x-auto shadow">
+          <table className="table">
+            <thead className="text-center text-black">
+              <tr>
+                <th>Alternatif</th>
+                <th className="text-center">Model Kamera</th>
+                <th className="text-center">Harga Kamera</th>
+                <th className="text-center">Resolusi Foto (Pixel)</th>
+                <th className="text-center">Resolusi Video (Pixel)</th>
+                <th className="text-center">Kapasitas Baterai</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cameraAttributes.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  <td className="text-center">{row.camera}</td>
+                  <td className="text-center">
+                    {row.cameraAttributes.batteryPower}
+                  </td>
+                  <td className="text-center">{row.cameraAttributes.model}</td>
+                  <td className="text-center">
+                    {row.cameraAttributes.photoResolution}
+                  </td>
+                  <td className="text-center">{row.cameraAttributes.price}</td>
+                  <td className="text-center">
+                    {row.cameraAttributes.videoResolution}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div className="flex items-center justify-center">
         <button
           onClick={handleCalculate}
@@ -144,9 +162,14 @@ const RankingPage = () => {
               <thead className="text-center text-black">
                 <tr>
                   <th>Alternatif</th>
-                  {normalizedMatrix[0].map((_, col) => (
+                  <th className="text-center">Model Kamera</th>
+                  <th className="text-center">Harga Kamera</th>
+                  <th className="text-center">Resolusi Foto (Pixel)</th>
+                  <th className="text-center">Resolusi Video (Pixel)</th>
+                  <th className="text-center">Kapasitas Baterai</th>
+                  {/* {normalizedMatrix[0].map((_, col) => (
                     <th key={col}>Kriteria {col + 1}</th>
-                  ))}
+                  ))} */}
                 </tr>
               </thead>
               <tbody className="text-center">
@@ -171,9 +194,14 @@ const RankingPage = () => {
               <thead>
                 <tr className="font-bold text-black">
                   <th>Alternatif</th>
-                  {weightedMatrix[0].map((_, col) => (
+                  <th className="text-center">Model Kamera</th>
+                  <th className="text-center">Harga Kamera</th>
+                  <th className="text-center">Resolusi Foto (Pixel)</th>
+                  <th className="text-center">Resolusi Video (Pixel)</th>
+                  <th className="text-center">Kapasitas Baterai</th>
+                  {/* {weightedMatrix[0].map((_, col) => (
                     <th key={col}>Kriteria {col + 1}</th>
-                  ))}
+                  ))} */}
                 </tr>
               </thead>
               <tbody>
