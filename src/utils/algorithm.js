@@ -1,3 +1,4 @@
+//Fungsi Normalisasi
 export const normalizeMatrix = (data) => {
   const numAlternatives = data.length;
   const numCriteria = Object.keys(data[0].cameraAttributes).length;
@@ -32,6 +33,7 @@ export const normalizeMatrix = (data) => {
   return normalizedMatrix;
 };
 
+//Fungsi Perhitungan Matriks
 export const calculateWeightedMatrix = (normalizedMatrix, weights) => {
   const numAlternatives = normalizedMatrix.length;
   const numCriteria = normalizedMatrix[0].length;
@@ -50,6 +52,7 @@ export const calculateWeightedMatrix = (normalizedMatrix, weights) => {
   return weightedMatrix;
 };
 
+//Fungsi Perhitungan Solusi Ideal
 export const calculateIdealSolutions = (weightedMatrix, isMaximize) => {
   const numCriteria = weightedMatrix[0].length;
   const idealSolutions = [];
@@ -74,6 +77,7 @@ export const calculateIdealSolutions = (weightedMatrix, isMaximize) => {
   return idealSolutions;
 };
 
+//Fungsi Jarak
 export const calculateDistances = (weightedMatrix, idealSolutions) => {
   const numAlternatives = weightedMatrix.length;
   const numCriteria = weightedMatrix[0].length;
@@ -92,6 +96,7 @@ export const calculateDistances = (weightedMatrix, idealSolutions) => {
   return distances;
 };
 
+//Fungsi Nilai Preferensi
 export const calculateCloseness = (distances) => {
   const numAlternatives = distances.length;
   const closeness = [];
@@ -104,6 +109,7 @@ export const calculateCloseness = (distances) => {
   return closeness;
 };
 
+//Fungsi Ranking
 export const rankAlternatives = (closeness) => {
   const numAlternatives = closeness.length;
   const rankedAlternatives = Array.from(
