@@ -106,8 +106,11 @@ export const calculateCloseness = (distances) => {
 
 export const rankAlternatives = (closeness) => {
   const numAlternatives = closeness.length;
-  const rankedAlternatives = Array.from(Array(numAlternatives).keys()).sort(
-    (a, b) => closeness[b] - closeness[a]
-  );
+  const rankedAlternatives = Array.from(
+    Array(numAlternatives),
+    (_, index) => index
+  ).sort((a, b) => closeness[b] - closeness[a]);
+
+  console.log(rankedAlternatives);
   return rankedAlternatives;
 };

@@ -21,7 +21,7 @@ const RankingPage = () => {
     [5, 8, 7, 6, 1],
     [6, 7, 5, 9, 4],
   ]);
-  const [weights, setWeights] = useState([model, price, photo, video, battery]);
+  const [weights, setWeights] = useState([battery, model, photo, price, video]);
   const [isMaximize, setIsMaximize] = useState([true, true, true, true]);
   const [normalizedMatrix, setNormalizedMatrix] = useState([]);
   const [weightedMatrix, setWeightedMatrix] = useState([]);
@@ -38,6 +38,8 @@ const RankingPage = () => {
     const dist = calculateDistances(weighted, ideal);
     const close = calculateCloseness(dist);
     const ranked = rankAlternatives(close);
+
+    console.log("ranked:", ranked);
 
     setNormalizedMatrix(normalized);
     setWeightedMatrix(weighted);
@@ -117,11 +119,11 @@ const RankingPage = () => {
             <thead className="text-center text-black">
               <tr>
                 <th>Alternatif</th>
-                <th className="text-center">Model Kamera</th>
-                <th className="text-center">Harga Kamera</th>
-                <th className="text-center">Resolusi Foto (Pixel)</th>
-                <th className="text-center">Resolusi Video (Pixel)</th>
                 <th className="text-center">Kapasitas Baterai</th>
+                <th className="text-center">Model Kamera</th>
+                <th className="text-center">Resolusi Foto (Pixel)</th>
+                <th className="text-center">Harga Kamera</th>
+                <th className="text-center">Resolusi Video (Pixel)</th>
               </tr>
             </thead>
             <tbody>
@@ -162,11 +164,11 @@ const RankingPage = () => {
               <thead className="text-center text-black">
                 <tr>
                   <th>Alternatif</th>
-                  <th className="text-center">Model Kamera</th>
-                  <th className="text-center">Harga Kamera</th>
-                  <th className="text-center">Resolusi Foto (Pixel)</th>
-                  <th className="text-center">Resolusi Video (Pixel)</th>
                   <th className="text-center">Kapasitas Baterai</th>
+                  <th className="text-center">Model Kamera</th>
+                  <th className="text-center">Resolusi Foto (Pixel)</th>
+                  <th className="text-center">Harga Kamera</th>
+                  <th className="text-center">Resolusi Video (Pixel)</th>
                   {/* {normalizedMatrix[0].map((_, col) => (
                     <th key={col}>Kriteria {col + 1}</th>
                   ))} */}
@@ -350,7 +352,7 @@ const RankingPage = () => {
                 </tr>
               </thead>
               <tbody className="text-center">
-                {rankedAlternatives.map((alternative, index) => (
+                {rankedAlternatives.slice(0, 5).map((alternative, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{cameraAttributes[alternative].camera}</td>
