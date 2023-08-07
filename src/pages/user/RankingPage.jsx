@@ -79,7 +79,7 @@ const RankingPage = () => {
   return (
     <div className="p-8 shadow-md">
       <h2 className="my-3 text-xl font-bold text-center">Kalkulator TOPSIS</h2>
-      // Tabel Bobot
+      {/* // Tabel Bobot */}
       <h3 className="text-left">Bobot</h3>
       <div className="p-4 overflow-x-auto shadow">
         <table className="table">
@@ -113,7 +113,7 @@ const RankingPage = () => {
           </tbody>
         </table>
       </div>
-      // Tabel Bobot Kriteria
+      {/* // Tabel Bobot Kriteria */}
       <div>
         <h3 className="">Bobot Kriteria</h3>
         <div className="p-4 overflow-x-auto shadow">
@@ -157,7 +157,7 @@ const RankingPage = () => {
           Hitung
         </button>
       </div>
-      //Tabel Matriks Keputusan Ternormalisasi
+      {/* //Tabel Matriks Keputusan Ternormalisasi */}
       {normalizedMatrix.length > 0 && (
         <>
           <h3 className="text-center">Matriks Keputusan Ternormalisasi:</h3>
@@ -224,7 +224,7 @@ const RankingPage = () => {
       )}
       {idealSolutions.length > 0 && (
         <>
-          //Tabel Solusi Ideal Positif
+          {/* //Tabel Solusi Ideal Positif */}
           <h3>Solusi Ideal Positif:</h3>
           <div className="p-4 overflow-x-auto shadow">
             <table className="table">
@@ -246,7 +246,7 @@ const RankingPage = () => {
               </tbody>
             </table>
           </div>
-          //Tabel Ideal Negatif
+          {/* //Tabel Ideal Negatif */}
           <h3>Solusi Ideal Negatif:</h3>
           <div className="p-4 overflow-x-auto shadow">
             <table className="table">
@@ -272,7 +272,7 @@ const RankingPage = () => {
       )}
       {distances.length > 0 && (
         <>
-          //Tabel Separasi Positif
+          {/* //Tabel Separasi Positif */}
           <h3>Nilai Separasi Positif:</h3>
           <div className="p-4 overflow-x-auto shadow">
             <table className="table">
@@ -294,7 +294,7 @@ const RankingPage = () => {
               </tbody>
             </table>
           </div>
-          //Tabel Separasi Negatif
+          {/* //Tabel Separasi Negatif */}
           <h3>Nilai Separasi Negatif:</h3>
           <div className="p-4 overflow-x-auto shadow">
             <table className="table">
@@ -320,7 +320,7 @@ const RankingPage = () => {
       )}
       {closeness.length > 0 && (
         <>
-          //Tabel Nilai Preferensi Terhadap Solusi Ideal
+          {/* //Tabel Nilai Preferensi Terhadap Solusi Ideal */}
           <h3>Nilai Preferensi Terhadap Solusi Ideal:</h3>
           <div className="p-4 overflow-x-auto shadow">
             <table className="table mx-auto">
@@ -346,7 +346,7 @@ const RankingPage = () => {
       )}
       {rankedAlternatives.length > 0 && (
         <>
-          //Tabel Alternatif
+          {/* //Tabel Alternatif */}
           <h3>Alternatif Terurut:</h3>
           <div className="p-4 overflow-x-auto shadow">
             <table className="table">
